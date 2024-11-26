@@ -1,26 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
+	const agregar = async(e)=>{
+		e.preventDefault()
+		let nuevoUsuario={
+			name:name,
+			email:email,
+			password:password
+		}
+		let resp = await actions.signUp(nuevoUsuario)
+	}
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+		<div className="text-center mt-5 container">
+			<h1>Sign up</h1>
+			<form>
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">name</label>
+					<input type="text" value={name} onChange={(e)=>setName(e.target.value)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Email address</label>
+					<input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+				</div>
+				<div class="mb-3">
+					<label for="exampleInputPassword1" class="form-label">Password</label>
+					<input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} class="form-control" id="exampleInputPassword1" />
+				</div>
+				<button type="button" onClick={(e)=>agregar(e)} class="btn btn-primary">Sign up</button>
+			</form>
 		</div>
 	);
 };
