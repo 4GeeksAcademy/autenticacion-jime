@@ -19,11 +19,11 @@ export const Home = () => {
 		let resp = await actions.signUp(nuevoUsuario)
 	}
 	return (
-		<div className="text-center mt-5 container">
+		<div className="text-center mt-5 container w-50 bg-light">
 			<h1>Sign up</h1>
 			<form>
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">name</label>
+					<label for="exampleInputEmail1" class="form-label">Name</label>
 					<input type="text" value={name} onChange={(e)=>setName(e.target.value)} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
 				</div>
 				<div class="mb-3">
